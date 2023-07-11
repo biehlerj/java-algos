@@ -7,10 +7,10 @@ package fibonacci;
  */
 public class fibonacci {
     /**
-     * Code to find the nth fibonacci
+     * Code to find the nth number in the Fibonacci sequence using power method
      * 
-     * @param n the depth of the fibonacci sequence to find
-     * @return the fibonacci number at the nth position
+     * @param n The depth of the fibonacci sequence to find
+     * @return The fibonacci number at the nth position
      */
     static int fib(int n) {
         int f[][] = new int[][] { { 1, 1 }, { 1, 0 } };
@@ -19,6 +19,53 @@ public class fibonacci {
         power(f, n - 1);
 
         return f[0][0];
+    }
+
+    /**
+     * Finds the nth number in the Fibonacci sequence iteratively
+     * 
+     * @param n The number in the sequence to find
+     * @return The Fibonacci number
+     */
+    static int iterativeFib(int n) {
+        int a = 0, b = 1, c;
+        if (n == 0)
+            return a;
+        for (int i = 2; i <= n; i++) {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return b;
+    }
+
+    /**
+     * Finds the nth number in the Fibonacci sequence recursively
+     * 
+     * @param n The number in the sequence to find
+     * @return The Fibonacci number
+     */
+    static int recursiveFib(int n) {
+        if (n <= 1)
+            return n;
+        return recursiveFib(n - 1) + recursiveFib(n - 2);
+    }
+
+    /**
+     * Finds the nth number in the Fibonacci sequence using dynamic programming
+     * 
+     * @param n The number in the sequence to find
+     * @return The Fibonacci number
+     */
+    static int dpFib(int n) {
+        int f[] = new int[n + 2];
+
+        f[0] = 0;
+        f[1] = 1;
+
+        for (int i = 2; i <= n; i++)
+            f[i] = f[i - 1] + f[i - 2];
+        return f[n];
     }
 
     /**
@@ -60,6 +107,10 @@ public class fibonacci {
     // Driver code
     public static void main(String[] args) {
         int n = 9;
-        System.out.println(fib(n));
+        System.out.println("Fibonacci using power matrix: " + fib(n));
+        System.out.println("Fibonacci iteratively: " + iterativeFib(n));
+        System.out.println("Fibonacci using recursion: " + recursiveFib(n));
+        System.out.println("Fibonacci using dynamic programming: " + dpFib(n));
+
     }
 }
